@@ -1,0 +1,76 @@
+project('lwext4', 'c', 'cpp')
+
+ext2fs_dep = declare_dependency(
+    compile_args: [
+        '-DCONFIG_HAVE_OWN_ERRNO=1',
+        '-DCONFIG_DEBUG_PRINTF=0',
+        '-DCONFIG_HAVE_OWN_ASSERT=1',
+        '-DCONFIG_DEBUG_ASSERT=0',
+    ],
+    include_directories : ['include'],
+    sources: [
+        'include/misc/queue.h',
+        'include/misc/tree.h',
+        'include/ext4_balloc.h',
+        'include/ext4_bcache.h',
+        'include/ext4_bitmap.h',
+        'include/ext4_block_group.h',
+        'include/ext4_blockdev.h',
+        'include/ext4_config.h',
+        'include/ext4_crc32.h',
+        'include/ext4_debug.h',
+        'include/ext4_dir_idx.h',
+        'include/ext4_dir.h',
+        'include/ext4_errno.h',
+        'include/ext4_extent.h',
+        'include/ext4_fs.h',
+        'include/ext4_hash.h',
+        'include/ext4_ialloc.h',
+        'include/ext4_inode.h',
+        'include/ext4_journal.h',
+        'include/ext4_mbr.h',
+        'include/ext4_misc.h',
+        'include/ext4_mkfs.h',
+        'include/ext4_oflags.h',
+        'include/ext4_super.h',
+        'include/ext4_trans.h',
+        'include/ext4_types.h',
+        'include/ext4_xattr.h',
+        'include/ext4.h',
+        'src/ext4_balloc.c',
+        'src/ext4_bcache.c',
+        'src/ext4_bitmap.c',
+        'src/ext4_block_group.c',
+        'src/ext4_blockdev.c',
+        'src/ext4_crc32.c',
+        'src/ext4_debug.c',
+        'src/ext4_dir_idx.c',
+        'src/ext4_dir.c',
+        'src/ext4_extent.c',
+        'src/ext4_fs.c',
+        'src/ext4_hash.c',
+        'src/ext4_ialloc.c',
+        'src/ext4_inode.c',
+        'src/ext4_journal.c',
+        'src/ext4_mbr.c',
+        'src/ext4_mkfs.c',
+        'src/ext4_super.c',
+        'src/ext4_trans.c',
+        'src/ext4_xattr.c',
+        'src/ext4.c'
+    ]
+)
+
+# test
+executable(
+    'ext2_test',
+    native: true,
+    sources: [
+    'test/ext2_test.cc',
+    ],
+    cpp_args: [
+        '-std=c++17',
+        '-fno-rtti',
+    ],
+    dependencies: [ ext2fs_dep ],
+)

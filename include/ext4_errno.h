@@ -69,11 +69,11 @@ extern "C" {
 #endif
 
 #ifndef ENODATA
- #ifdef ENOATTR
- #define ENODATA ENOATTR
- #else
- #define ENODATA 61
- #endif
+#ifdef ENOATTR
+#define ENODATA ENOATTR
+#else
+#define ENODATA 61
+#endif
 #endif
 
 #ifndef ENOTSUP
